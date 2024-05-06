@@ -32,12 +32,6 @@ public class conectaDAO {
         }
     }
 
-    /**
-     * Encerra a conexão com o banco de dados.
-     *
-     * Este método é usado para encerrar a conexão com o banco de dados após o
-     * término das operações.
-     */
     public void desconectar() {
         try {
             if (conexao != null && !conexao.isClosed()) {

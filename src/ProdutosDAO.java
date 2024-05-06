@@ -1,23 +1,38 @@
 
+import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+
 
 public class ProdutosDAO {
 
-    Connection conn;
-    PreparedStatement prep;
-    ResultSet resultset;
-    ArrayList<ProdutosDTO> listagem = new ArrayList<>();
+    public  static boolean cadastrarProduto(ProdutosDTO p) throws SQLException {
+        try {
+            //conexão com o banco
 
-    public void cadastrarProduto(ProdutosDTO produto) {
+            conectaDAO conexao = new conectaDAO();
+            conexao.conectar();
 
+        
+            String sql = "INSERT INTO Produtos ( nome,valor,status) values (?, ?, ?)";
+            
+            PreparedStatement query = conexao.getConexao().prepareStatement(sql);
+            query.setString(1, p.getNome());
+            query.setInt(2, p.getValor());
+            query.setString(3, p.getStatus());
+            query.execute();
+            conexao.desconectar();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar registro no banco de dados");
+        }
+        return false;
     }
 
-    public ArrayList<ProdutosDTO> listarProdutos() {
+   /*public ArrayList<ProdutosDTO> listarProdutos() {
 
         return listagem;
-    }
+    } */
 
 }

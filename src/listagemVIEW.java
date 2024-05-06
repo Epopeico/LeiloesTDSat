@@ -16,10 +16,10 @@ public class listagemVIEW extends javax.swing.JFrame {
     /**
      * Creates new form listagemVIEW
      */
-    public listagemVIEW() {
+   /* public listagemVIEW() {
         initComponents();
-        listarProdutos();
-    }
+        listarProdutos(); 
+    } */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -137,12 +137,12 @@ public class listagemVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        String id = id_produto_venda.getText();
+        /*String id = id_produto_venda.getText();
         
         ProdutosDAO produtosdao = new ProdutosDAO();
         
         //produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos();
+        listarProdutos(); */
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
@@ -202,7 +202,7 @@ public class listagemVIEW extends javax.swing.JFrame {
     private javax.swing.JTable listaProdutos;
     // End of variables declaration//GEN-END:variables
 
-    private void listarProdutos(){
+    /*private void listarProdutos(){
         try {
             ProdutosDAO produtosdao = new ProdutosDAO();
             
@@ -221,6 +221,7 @@ public class listagemVIEW extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
+        */
     
-    }
+    
 }
