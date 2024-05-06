@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -13,13 +14,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class listagemVIEW extends javax.swing.JFrame {
 
-    /**
-     * Creates new form listagemVIEW
-     */
-   /* public listagemVIEW() {
+    public listagemVIEW() {
         initComponents();
-        listarProdutos(); 
-    } */
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,17 +41,7 @@ public class listagemVIEW extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LISTA DE PRODUTOS");
 
-        listaProdutos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nome", "Valor", "Status"
-            }
-        ));
+        listaProdutos.setModel(montarTabela());
         jScrollPane1.setViewportView(listaProdutos);
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
@@ -136,12 +123,13 @@ public class listagemVIEW extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
         /*String id = id_produto_venda.getText();
         
         ProdutosDAO produtosdao = new ProdutosDAO();
         
-        //produtosdao.venderProduto(Integer.parseInt(id));
+        produtosdao.venderProduto(Integer.parseInt(id));
         listarProdutos(); */
     }//GEN-LAST:event_btnVenderActionPerformed
 
@@ -188,6 +176,31 @@ public class listagemVIEW extends javax.swing.JFrame {
             }
         });
     }
+    
+    private DefaultTableModel montarTabela() {
+        String[] colunas = {"id", "Nome", "Valor", "Status",};
+
+        // Criamos a tabela
+        DefaultTableModel tabela = new DefaultTableModel(colunas, 0);
+
+        List<ProdutosDTO> lista = ProdutosDAO.listarTodos();
+
+        for (int i = 0; i < lista.size(); i++) {
+            ProdutosDTO p = lista.get(i);
+
+            String[] linha = {
+                Integer.toString(p.getId()),
+                p.getNome(),
+                Integer.toString(p.getValor()),
+                p.getStatus(),
+
+            };
+
+            tabela.addRow(linha);
+
+        }
+        return tabela;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVendas;
@@ -202,26 +215,5 @@ public class listagemVIEW extends javax.swing.JFrame {
     private javax.swing.JTable listaProdutos;
     // End of variables declaration//GEN-END:variables
 
-    /*private void listarProdutos(){
-        try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
-            
-            DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
-            model.setNumRows(0);
-            
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
-            
-            for(int i = 0; i < listagem.size(); i++){
-                model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getValor(),
-                    listagem.get(i).getStatus()
-                });
-            }
-        } catch (Exception e) {
-        }
-        */
-    
     
 }
