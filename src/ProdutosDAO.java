@@ -67,6 +67,32 @@ public class ProdutosDAO {
 
         }
         return lista;
-
     }
+        
+        
+        public static boolean VenderProduto(ProdutosDTO p) {
+        try {
+
+            conectaDAO conexao = new conectaDAO();
+            conexao.conectar();
+
+            String sql = "UPDATE produtos SET status = 'Vendido' WHERE id = ?";
+            PreparedStatement consulta = conexao.getConexao().prepareStatement(sql);
+
+                      
+            consulta.setInt(1, p.getId());
+
+            // Executar a instruicao
+            consulta.execute();
+
+            // Desconectar
+            conexao.desconectar();
+            return true;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar registro no banco de dados ");
+            return false;
+        }
+    }
+
+        
 }

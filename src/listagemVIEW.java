@@ -1,6 +1,5 @@
-
-import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -125,12 +124,34 @@ public class listagemVIEW extends javax.swing.JFrame {
 
     
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        /*String id = id_produto_venda.getText();
+            try {
+        // Obter o ID digitado pelo usuário
+        int idProduto = Integer.parseInt(id_produto_venda.getText());
+
+        // Criar um objeto ProdutosDTO com o ID fornecido
+        ProdutosDTO p = new ProdutosDTO();
+        p.setId(idProduto);
+       
+
+        // Chamar o método VenderProduto para atualizar o status do produto
+        if (ProdutosDAO.VenderProduto(p)) {
+            // Se a atualização for bem-sucedida, exibir uma mensagem de sucesso
+            JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
+            
+            // Atualizar a tabela após a venda
+            listaProdutos.setModel(montarTabela());
+        } else {
+            // Se a atualização falhar, exibir uma mensagem de erro
+            JOptionPane.showMessageDialog(null, "Erro ao vender o produto.");
+        }
+    } catch (NumberFormatException e) {
+        // Se o usuário não inserir um número válido, exibir uma mensagem de erro
+        JOptionPane.showMessageDialog(null, "Por favor, insira um id válido.");
+    }
         
-        ProdutosDAO produtosdao = new ProdutosDAO();
         
-        produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos(); */
+        
+        
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
