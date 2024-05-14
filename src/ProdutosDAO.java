@@ -94,5 +94,37 @@ public class ProdutosDAO {
         }
     }
 
+     public static List<ProdutosDTO> buscarProdutosVendidos() throws SQLException {
+    List<ProdutosDTO> produtosDTOStatus = new ArrayList<>();
+
+    try {
+        conectaDAO conexao = new conectaDAO();
+        conexao.conectar();
+
+        String sql = "SELECT * FROM produtos WHERE status = 'Vendido'";
+        PreparedStatement consulta = conexao.getConexao().prepareStatement(sql);
+
+        ResultSet resposta = consulta.executeQuery();
+
+        while (resposta.next()) {
+            ProdutosDTO p = new ProdutosDTO();
+                
+            p.setId(resposta.getInt("id"));
+            p.setNome(resposta.getString("nome"));
+            p.setValor(resposta.getInt("valor"));
+            p.setStatus(resposta.getString("status"));
+   
+            produtosDTOStatus.add(p);
+        }
+        conexao.desconectar();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro ao buscar Produtos Vendidos no banco de dados");
+        throw e;
+    }
+    return produtosDTOStatus;
+}
+       
+        
+        
         
 }
